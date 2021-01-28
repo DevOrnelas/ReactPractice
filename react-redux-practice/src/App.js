@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import { connect } from 'react-redux'
+import {add_to_state} from './Actions/addActions'
+import {sub_from_state} from './Actions/subtractActions'
+
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Redux Testing one wo one two one two....</h1>
+      <h1>Number: <span>{props.state}</span></h1>
+      <button onClick={props.add}>ADD</button>
+      <button onClick={props.sub}>SUBTRACT</button>
     </div>
   );
+
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: ()=>{
+      dispatch(add_to_state())
+    },
+    sub: ()=>{
+      dispatch(sub_from_state())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
